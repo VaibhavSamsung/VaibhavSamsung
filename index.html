@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Samsung Incentive Calculator</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= CREATED BY ================= -->
+
+    <div class="created-by">
+        <marquee behavior="scroll" direction="left">
+            Created by Vaibhav Zambare
+        </marquee>
+    </div>
+
+
+    <!-- ================= HEADER ================= -->
+
+    <header class="header">
+
+        <div class="logo">
+            SAMSUNG
+        </div>
+
+        <div class="header-title">
+            INCENTIVE CALCULATOR
+        </div>
+
+        <div class="header-actions">
+
+            <button
+                class="btn btn-white"
+                onclick="toggleDarkMode()">
+                🌙
+            </button>
+
+            <button
+                class="btn btn-white"
+                onclick="window.print()">
+                🖨 PRINT
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <div class="container">
+
+        <!-- ================= SUMMARY ================= -->
+
+        <div class="summary">
+
+            <div class="card">
+
+                <div class="card-label">
+                    TOTAL MODELS
+                </div>
+
+                <div
+                    class="card-value"
+                    id="totalModels">
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-label">
+                    TOTAL QUANTITY
+                </div>
+
+                <div
+                    class="card-value"
+                    id="totalQty">
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-label">
+                    TOTAL INCENTIVE
+                </div>
+
+                <div
+                    class="card-value"
+                    id="totalIncentive">
+                    ₹0
+                </div>
+
+            </div>
+
+
+            <div class="card">
+
+                <div class="card-label">
+                    CALCULATION DATE
+                </div>
+
+                <div
+                    class="card-value date-value"
+                    id="displayDate">
+                    --
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= EMPLOYEE FORM ================= -->
+
+        <div class="form-card">
+
+            <div class="form-grid">
+
+                <div class="form-group">
+
+                    <label>
+                        Employee Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="employeeName"
+                        placeholder="Enter employee name">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Store / Branch
+                    </label>
+
+                    <input
+                        type="text"
+                        id="storeName"
+                        placeholder="Enter store name">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Month
+                    </label>
+
+                    <input
+                        type="month"
+                        id="month">
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Calculation Date
+                    </label>
+
+                    <input
+                        type="date"
+                        id="calcDate">
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= CALCULATOR ================= -->
+
+        <div class="section-head">
+
+            <div class="section-title">
+                📊 Incentive Calculation
+            </div>
+
+
+            <div class="section-buttons">
+
+                <button
+                    class="btn btn-blue"
+                    onclick="addRow()">
+                    + ADD MODEL
+                </button>
+
+
+                <button
+                    class="btn btn-green"
+                    onclick="saveCalculation()">
+                    💾 SAVE
+                </button>
+
+
+                <button
+                    class="btn btn-dark"
+                    onclick="exportCSV()">
+                    📥 EXCEL
+                </button>
+
+
+                <button
+                    class="btn btn-red"
+                    onclick="resetCalculation()">
+                    RESET
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <div class="table-card">
+
+            <div class="table-wrapper">
+
+                <table id="calculationTable">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                SR NO
+                            </th>
+
+                            <th>
+                                MODEL
+                            </th>
+
+                            <th>
+                                QTY
+                            </th>
+
+                            <th>
+                                MODEL WISE INCENTIVE
+                            </th>
+
+                            <th>
+                                FINAL INCENTIVE
+                            </th>
+
+                            <th>
+                                ACTION
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="calculationBody">
+                    </tbody>
+
+
+                    <tfoot>
+
+                        <tr class="total-row">
+
+                            <td colspan="2">
+                                GRAND TOTAL
+                            </td>
+
+                            <td id="footerQty">
+                                0
+                            </td>
+
+                            <td>
+                                -
+                            </td>
+
+                            <td id="footerTotal">
+                                ₹0
+                            </td>
+
+                            <td>
+                                -
+                            </td>
+
+                        </tr>
+
+                    </tfoot>
+
+                </table>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= MODEL MASTER ================= -->
+
+        <div class="master-section">
+
+            <div class="section-head">
+
+                <div class="section-title">
+                    ⚙ Model Incentive Master
+                </div>
+
+
+                <div class="section-buttons">
+
+                    <button
+                        class="btn btn-blue"
+                        onclick="toggleMaster()">
+                        ✏ EDIT INCENTIVE
+                    </button>
+
+
+                    <button
+                        class="btn btn-green hidden"
+                        id="saveMasterBtn"
+                        onclick="saveMaster()">
+                        💾 SAVE RATES
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="master-card hidden"
+                id="masterCard">
+
+                <div class="master-toolbar">
+
+                    <div>
+                        <strong>
+                            Model Wise Incentive
+                        </strong>
+                    </div>
+
+
+                    <input
+                        class="master-search"
+                        type="text"
+                        id="masterSearch"
+                        placeholder="Search model..."
+                        onkeyup="searchMaster()">
+
+                </div>
+
+
+                <div class="table-wrapper">
+
+                    <table class="master-table">
+
+                        <thead>
+
+                            <tr>
+
+                                <th>
+                                    SR NO
+                                </th>
+
+                                <th>
+                                    MODEL
+                                </th>
+
+                                <th>
+                                    INCENTIVE / UNIT
+                                </th>
+
+                            </tr>
+
+                        </thead>
+
+
+                        <tbody id="masterBody">
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <div class="footer">
+        Samsung Incentive Calculator
+        • Model Wise Incentive Management
+    </div>
+
+
+    <!-- ================= TOAST ================= -->
+
+    <div
+        class="toast"
+        id="toast">
+        Saved Successfully
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
